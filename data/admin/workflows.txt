@@ -1,0 +1,41 @@
+Shopcard Admin Workflow Guide
+
+Merchant Application Review Workflow:
+1. New merchant applications appear in the "Pending Applications" queue.
+2. Verify business documentation (registration, tax ID, bank details).
+3. Conduct a background check using the integrated verification service.
+4. Approve or reject the application with a documented reason.
+5. For approved merchants, trigger the automated onboarding email sequence.
+6. For rejected applications, send a rejection notice with improvement suggestions.
+
+Product Review Workflow:
+1. New product listings enter the "Pending Review" queue.
+2. Check product images for quality and compliance.
+3. Verify product description accuracy and completeness.
+4. Ensure pricing is within acceptable ranges for the category.
+5. Approve, reject, or request modifications.
+6. Communicate decisions to the merchant within 24 hours.
+
+Escalated Support Workflow:
+1. Escalated tickets from Consumer or Merchant support teams appear in the Admin queue.
+2. Review the full ticket history and previous resolution attempts.
+3. Contact involved parties if additional information is needed.
+4. Make a resolution decision based on platform policies.
+5. Implement the resolution (refund, credit, account action).
+6. Update the ticket with the resolution and close it.
+
+Promotional Campaign Workflow:
+1. Marketing team submits a campaign request with details and budget.
+2. Admin reviews the campaign for compliance with platform policies.
+3. Configure the campaign in the Promotions Management tool.
+4. Schedule the campaign with start and end dates.
+5. Monitor campaign performance during the active period.
+6. Generate a post-campaign report with results and ROI analysis.
+
+Data Export and Reporting Workflow:
+1. Receive data export or reporting requests from stakeholders.
+2. Verify the requester has appropriate authorization.
+3. Generate the requested report from the Reporting Dashboard.
+4. Review the report for data accuracy and sensitivity.
+5. Deliver the report through the secure document portal.
+6. Log the export in the Data Access Register for compliance.

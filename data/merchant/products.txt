@@ -1,0 +1,22 @@
+Shopcard Merchant Product Management Guide
+
+Creating a Product Listing:
+To list a product, go to the Seller Dashboard and click "Add New Product." Fill in the required fields: product title, description, category, price, SKU, and stock quantity. Upload at least 3 high-quality product images (minimum 800x800 pixels).
+
+Product Categories:
+Choose the most relevant category for your product. Accurate categorization improves discoverability. If your product fits multiple categories, select the primary category and add secondary categories as tags.
+
+Pricing Guidelines:
+Set competitive prices based on market research. Shopcard provides a pricing tool that shows average prices for similar products. Include all taxes in the listed price. Avoid frequent drastic price changes, as this may affect your seller rating.
+
+Inventory Management:
+Keep your inventory updated in real-time. When stock runs low (below 10 units), you will receive a notification. Out-of-stock products are automatically hidden from search results. Use the bulk upload feature to update inventory for multiple products at once via CSV.
+
+Product Descriptions:
+Write clear, detailed product descriptions. Include key specifications, materials, dimensions, and care instructions. Use bullet points for readability. Avoid promotional language or unverified claims.
+
+Product Variants:
+For products with multiple variants (sizes, colors, materials), create variant options under a single listing. Each variant can have its own price, SKU, and stock quantity.
+
+Product Approval:
+New listings are reviewed by the Shopcard quality team within 24 hours. Products that violate our content policies will be rejected with a reason provided. You can edit and resubmit rejected listings.

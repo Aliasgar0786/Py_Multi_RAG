@@ -1,0 +1,24 @@
+Shopcard Admin Platform Procedures
+
+User Management:
+Admins can manage user accounts across all platforms (Consumer, Merchant, Admin). Actions include: viewing user profiles, suspending or banning accounts, resetting passwords, and reviewing account activity logs.
+
+Account Suspension Process:
+1. Review the reported violation or flagged activity.
+2. Verify the violation with supporting evidence.
+3. Issue a warning for first-time minor violations.
+4. Suspend the account for repeated or major violations.
+5. Document the action in the Admin Activity Log.
+6. Notify the affected user via email with the reason and appeal process.
+
+Content Moderation:
+Review flagged product listings, reviews, and messages. Remove content that violates Shopcard's Community Guidelines. Categories of violations include: counterfeit products, misleading descriptions, hate speech, and spam.
+
+Dispute Resolution:
+Handle escalated disputes between consumers and merchants. Review transaction history, communication logs, and evidence from both parties. Issue a resolution decision and communicate it to all parties within 5 business days.
+
+Platform Configuration:
+Manage global platform settings including: commission rates, shipping policies, payment gateway configurations, and promotional campaigns. Changes to platform-wide settings require approval from a Senior Admin.
+
+Compliance and Auditing:
+Conduct regular audits of merchant accounts, transaction records, and platform operations. Ensure compliance with legal and regulatory requirements. Generate compliance reports for internal review and external audits.

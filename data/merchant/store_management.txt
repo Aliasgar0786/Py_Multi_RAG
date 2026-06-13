@@ -1,0 +1,25 @@
+Shopcard Merchant Store Management Guide
+
+Store Dashboard:
+The Seller Dashboard is your central hub for managing your Shopcard store. It provides an overview of sales, orders, inventory, customer messages, and performance metrics.
+
+Order Fulfillment:
+When a customer places an order, you will receive a notification. Orders must be shipped within 2 business days. Mark orders as "Shipped" and provide a tracking number. Late shipments negatively impact your seller performance score.
+
+Shipping Management:
+Configure shipping zones to define where you ship. Set shipping rates per zone (flat rate, weight-based, or free shipping). Integrate with supported carriers (UPS, FedEx, USPS, DHL) for automatic label generation and tracking.
+
+Customer Communication:
+Respond to customer messages within 24 hours. Use the Seller Messaging Center for all customer interactions. Professional and timely communication improves your seller rating.
+
+Returns and Refunds:
+Process return requests promptly. Inspect returned items and issue refunds within 3 business days of receiving the return. Provide clear return instructions to customers.
+
+Performance Metrics:
+Your seller performance is measured by: order defect rate, late shipment rate, cancellation rate, and customer response time. Maintain performance above minimum thresholds to keep your account in good standing.
+
+Analytics and Reports:
+Access detailed sales reports, traffic analytics, and conversion data from the Analytics tab. Use these insights to optimize your product listings, pricing, and inventory strategy.
+
+Store Customization:
+Customize your store page with a banner image, featured products, and organized collections. A well-designed store page increases customer trust and conversion rates.

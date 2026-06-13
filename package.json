@@ -1,0 +1,23 @@
+{
+  "name": "shopcard-ai-chat-service",
+  "version": "1.0.0",
+  "description": "Shopcard AI Chat Service - Phase 1 Multi-RAG Prototype",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "test:client": "ts-node src/test_client.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "dotenv": "^16.4.7",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/ws": "^8.5.13",
+    "typescript": "^5.7.0",
+    "ts-node": "^10.9.2"
+  }
+}

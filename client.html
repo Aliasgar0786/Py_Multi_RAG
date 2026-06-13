@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopcard AI Chat - Test Client</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface-hover: #222632;
+      --border: #2a2e3a;
+      --text: #e4e6ed;
+      --text-muted: #8b8fa3;
+      --accent: #6c5ce7;
+      --accent-glow: rgba(108, 92, 231, 0.25);
+      --green: #00b894;
+      --red: #e74c3c;
+      --orange: #f39c12;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Status Badge ─────────────────────────────── */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      transition: background 0.3s;
+    }
+    .status-dot.connected { background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+    /* ── Chat Container ───────────────────────────── */
+    .chat-container {
+      width: 100%;
+      max-width: 720px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: 360px;
+      max-height: 55vh;
+    }
+
+    .msg {
+      max-width: 88%;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #fff;
+      border-bottom-right-radius: 3px;
+    }
+
+    .msg.server {
+      align-self: flex-start;
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 3px;
+    }
+
+    .msg.system {
+      align-self: center;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-style: italic;
+    }
+
+    .msg.error {
+      align-self: center;
+      color: var(--red);
+      font-size: 0.82rem;
+    }
+
+    /* metadata inside server messages */
+    .meta {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.15rem 0.6rem;
+    }
+    .meta span.label { font-weight: 600; color: var(--text-muted); }
+
+    /* ── Input Area ───────────────────────────────── */
+    .input-area {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      align-items: flex-end;
+    }
+
+    .platform-select {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.82rem;
+      font-family: inherit;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .platform-select:focus { border-color: var(--accent); }
+
+    .query-input {
+      flex: 1;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.88rem;
+      font-family: inherit;
+      outline: none;
+      resize: none;
+      min-height: 40px;
+      max-height: 100px;
+      transition: border-color 0.2s;
+    }
+    .query-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
+    .query-input::placeholder { color: var(--text-muted); }
+
+    .send-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+      white-space: nowrap;
+    }
+    .send-btn:hover { opacity: 0.9; }
+    .send-btn:active { transform: scale(0.96); }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Scrollbar ─────────────────────────────────── */
+    .messages::-webkit-scrollbar { width: 6px; }
+    .messages::-webkit-scrollbar-track { background: transparent; }
+    .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Shopcard AI Chat</h1>
+  <p class="subtitle">Interactive Test Client &middot; WebSocket</p>
+
+  <div class="status-bar">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="statusText">Disconnected</span>
+  </div>
+
+  <div class="chat-container">
+    <div class="messages" id="messages"></div>
+
+    <div class="input-area">
+      <select class="platform-select" id="platform">
+        <option value="consumer">Consumer</option>
+        <option value="merchant">Merchant</option>
+        <option value="admin">Admin</option>
+      </select>
+      <input
+        class="query-input"
+        id="queryInput"
+        type="text"
+        placeholder="Type your query…"
+        autocomplete="off"
+      />
+      <button class="send-btn" id="sendBtn" disabled>Send</button>
+    </div>
+  </div>
+
+  <script>
+    const WS_URL = "ws://localhost:8080";
+    const messagesEl = document.getElementById("messages");
+    const queryInput = document.getElementById("queryInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const platformSelect = document.getElementById("platform");
+    const statusDot = document.getElementById("statusDot");
+    const statusText = document.getElementById("statusText");
+
+    let ws = null;
+    let welcomeReceived = false;
+
+    // ── Connect ──────────────────────────────────────────────
+    function connect() {
+      addMessage("Connecting to " + WS_URL + "…", "system");
+      ws = new WebSocket(WS_URL);
+
+      ws.onopen = () => {
+        statusDot.classList.add("connected");
+        statusText.textContent = "Connected";
+        sendBtn.disabled = false;
+        welcomeReceived = false;
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+
+          if (!welcomeReceived) {
+            welcomeReceived = true;
+            addMessage(data.response || "Connected.", "system");
+            return;
+          }
+
+          // Render server response
+          if (data.status === "error") {
+            addMessage("Error: " + data.error, "error");
+          } else {
+            renderServerResponse(data);
+          }
+        } catch {
+          addMessage("Raw: " + event.data, "server");
+        }
+        sendBtn.disabled = false;
+      };
+
+      ws.onclose = () => {
+        statusDot.classList.remove("connected");
+        statusText.textContent = "Disconnected";
+        sendBtn.disabled = true;
+        addMessage("Disconnected. Reconnecting in 3s…", "system");
+        setTimeout(connect, 3000);
+      };
+
+      ws.onerror = () => {
+        addMessage("WebSocket error.", "error");
+      };
+    }
+
+    // ── Send ─────────────────────────────────────────────────
+    function send() {
+      const query = queryInput.value.trim();
+      if (!query || !ws || ws.readyState !== WebSocket.OPEN) return;
+
+      const platform = platformSelect.value;
+      const payload = { platform, query };
+
+      addMessage(`[${platform}] ${query}`, "user");
+      ws.send(JSON.stringify(payload));
+
+      queryInput.value = "";
+      sendBtn.disabled = true;
+    }
+
+    sendBtn.addEventListener("click", send);
+    queryInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+
+    // ── Render helpers ───────────────────────────────────────
+    function addMessage(text, type) {
+      const div = document.createElement("div");
+      div.className = "msg " + type;
+      div.textContent = text;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function renderServerResponse(data) {
+      const div = document.createElement("div");
+      div.className = "msg server";
+
+      const body = document.createElement("div");
+      body.textContent = data.response || "(empty response)";
+      div.appendChild(body);
+
+      // Metadata grid
+      const meta = document.createElement("div");
+      meta.className = "meta";
+      const fields = [
+        ["Platform", data.platform],
+        ["Intent", data.intent],
+        ["RAG", data.ragSelected],
+        ["Confidence", data.confidence],
+        ["Sources", (data.sources || []).join(", ") || "—"],
+        ["Model", `${data.provider}/${data.model}`],
+      ];
+      fields.forEach(([label, value]) => {
+        const l = document.createElement("span");
+        l.className = "label";
+        l.textContent = label;
+        const v = document.createElement("span");
+        v.textContent = value ?? "—";
+        meta.appendChild(l);
+        meta.appendChild(v);
+      });
+      div.appendChild(meta);
+
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    // ── Boot ─────────────────────────────────────────────────
+    connect();
+  </script>
+</body>
+</html>
