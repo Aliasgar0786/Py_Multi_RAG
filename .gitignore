@@ -1,8 +1,16 @@
-node_modules/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
 dist/
+build/
+venv/
+.venv/
+
+# Environment
 .env
-*.js
-*.d.ts
-*.js.map
-*.d.ts.map
-!tsconfig.json
+
+# IDE
+.vscode/
+.idea/
